@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: product
+    description: Customer data
+    config:
+      materialized: incremental
+      unique_key: "{{ env_var('UNIQUE_KEY', var('unique_key', '')) }}"
+    meta:
+      fal:
+        scripts:
+          before:
+            - fal_scripts/create_or_update_nocode_metadata_tables.py
+          after:
+            - fal_scripts/add_id_column.py

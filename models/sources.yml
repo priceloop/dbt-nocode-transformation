@@ -1,0 +1,9 @@
+version: 2
+sources:
+- name: airbyte
+  schema: public
+  quoting:
+    schema: true
+    identifier: false
+  tables:
+    - name: "{{ env_var('SOURCE_TABLE', var('source_table', '')) }}"

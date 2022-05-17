@@ -1,0 +1,24 @@
+table_name,name,tpe,position
+product,sku,{"CtString":{}},1
+product,asin,{"CtString":{}},2
+product,Marketplace,{"CtString":{}},3
+product,Fulfillment,{"CtString":{}},4
+product,Item Name,{"CtString":{}},5
+product,Item Discription,{"CtString":{}},6
+product,Status,{"CtString":{}},7
+product,Merchang Shipping Group,{"CtString":{}},8
+product,Item Condition,{"CtString":{}},9
+product,Sellable Inventory,{"CtNumber":{}},10
+product,Amazon Referral Cost,{"CtNumber":{}},11
+product,Amazon Variable Closing Cost,{"CtNumber":{}},12
+product,Amazon Per Item Cost,{"CtNumber":{}},13
+product,FBA Cost,{"CtNumber":{}},14
+product,Shipping Price,{"CtNumber":{}},15
+product,Item Price,{"CtNumber":{}},16
+product,Landed Price,{"CtNumber":{}},17
+product,rank1,{"CtNumber":{}},18
+product,category1,{"CtString":{}},19
+product,rank2,{"CtNumber":{}},20
+product,category2,{"CtString":{}},21
+product,rank3,{"CtNumber":{}},22
+product,category3,{"CtString":{}},23

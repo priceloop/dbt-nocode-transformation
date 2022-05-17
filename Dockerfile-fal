@@ -1,0 +1,13 @@
+FROM fishtownanalytics/dbt:1.0.0
+
+ENV DB_NAME priceloop
+ENV USER postgres
+ENV PASSWORD test3
+ENV HOST localhost
+ENV PORT 5432
+
+WORKDIR /usr/app/dbt/
+COPY requirement.txt ./requirement.txt 
+RUN pip3 install -r requirement.txt
+
+ENTRYPOINT [ "/bin/bash", "-c" ]
