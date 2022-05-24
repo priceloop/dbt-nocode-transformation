@@ -4,7 +4,7 @@ def check_if_table_existed(cursor, table_schema, table_name):
 
 def create_columns_table(cursor, conn, ws):
     try:
-        cursor.execute(f"""CREATE TABLE {ws}.columns (
+        cursor.execute(f"""CREATE TABLE "{ws}".columns (
             table_name text NULL,
 	        name text NULL,
             tpe text NULL,
@@ -17,7 +17,7 @@ def create_columns_table(cursor, conn, ws):
     
 def create_tables_table(cursor, conn, ws):
     try:
-        cursor.execute(f"""CREATE TABLE {ws}.tables (
+        cursor.execute(f"""CREATE TABLE "{ws}".tables (
             name text NULL,
             primary_keys text[] NULL,
             filters text NULL
