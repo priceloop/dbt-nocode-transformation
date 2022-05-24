@@ -4,7 +4,7 @@ models:
   - name: product
     description: Customer data
     config:
-      materialized: incremental
+      materialized: table
       unique_key: "{{ env_var('UNIQUE_KEY', var('unique_key', '')) }}"
     meta:
       fal:
