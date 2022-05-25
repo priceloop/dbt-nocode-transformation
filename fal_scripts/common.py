@@ -6,7 +6,7 @@ def check_if_table_existed(cursor, table_schema, table_name):
 
 def create_columns_table(cursor, conn, ws):
     try:
-        cursor.execute(f"""CREATE TABLE {ws}.columns (
+        cursor.execute(f"""CREATE TABLE "{ws}".columns (
             table_name text NULL,
 	        name text NULL,
             tpe text NULL,
@@ -20,7 +20,7 @@ def create_columns_table(cursor, conn, ws):
 
 def create_tables_table(cursor, conn, ws):
     try:
-        cursor.execute(f"""CREATE TABLE {ws}.tables (
+        cursor.execute(f"""CREATE TABLE "{ws}".tables (
             name text NULL,
             primary_keys text[] NULL,
             filters text NULL
@@ -51,7 +51,7 @@ def get_customer_table_column_details(cursor, source_table_name, ws_name):
 
 def insert_new_columns_to_columns_table(cursor, conn, col_with_types, desination_table_name, ws_name):
     if not check_if_table_existed(cursor, ws_name, "columns"):
-        create_columns_table(ws_name)
+        create_columns_table(cursor, conn, ws_name)
 
     index = 2
     for col in col_with_types:
@@ -80,7 +80,7 @@ def insert_new_columns_to_columns_table(cursor, conn, col_with_types, desination
 
 def insert_new_table_to_tables_table(cursor, conn, desination_table_name, ws_name, unique_key):
     if not check_if_table_existed(cursor, ws_name, "tables"):
-        create_tables_table(ws_name)
+        create_tables_table(cursor, conn, ws_name)
     query = f"""INSERT INTO "{ws_name}".tables (name, primary_keys, views) VALUES (%s, %s, %s)
             ON CONFLICT (name) DO UPDATE
             SET primary_keys = excluded.primary_keys,
