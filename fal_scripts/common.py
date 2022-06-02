@@ -84,7 +84,7 @@ def insert_new_table_to_tables_table(cursor, conn, desination_table_name, ws_nam
             ON CONFLICT (name) DO UPDATE
             SET views = excluded.views;
     """
-    data = (desination_table_name, "{" + unique_key + "}", "[]")
+    data = (desination_table_name, "[]")
     cursor.execute(query, data)
     conn.commit()
 
