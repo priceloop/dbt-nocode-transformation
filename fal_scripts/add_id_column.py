@@ -27,11 +27,11 @@ cursor = conn.cursor()
 
 def add_id_column():
     col_with_types = get_customer_table_column_details(cursor, desination_table_name, ws_name)
-    pk_id = "id"
+    pk_id = "_priceloop_id"
     if pk_id not in [col[0] for col in col_with_types]:
         query = f"""
             ALTER TABLE "{ws_name}"."{desination_table_name}"
-            ADD COLUMN "{pk_id}" SERIAL;
+            ADD COLUMN "{pk_id}" int4 NOT NULL GENERATED ALWAYS AS IDENTITY;
         """
         cursor.execute(query)
         conn.commit()
