@@ -1,2 +1,2 @@
-name,primary_keys,filters
-product,"{id, asin}",[]
+name,filters
+product,[]

@@ -22,7 +22,6 @@ def create_tables_table(cursor, conn, ws):
     try:
         cursor.execute(f"""CREATE TABLE "{ws}".tables (
             name text NULL,
-            primary_keys text[] NULL,
             filters text NULL
         )"""
                        )
@@ -81,10 +80,9 @@ def insert_new_columns_to_columns_table(cursor, conn, col_with_types, desination
 def insert_new_table_to_tables_table(cursor, conn, desination_table_name, ws_name, unique_key):
     if not check_if_table_existed(cursor, ws_name, "tables"):
         create_tables_table(cursor, conn, ws_name)
-    query = f"""INSERT INTO "{ws_name}".tables (name, primary_keys, views) VALUES (%s, %s, %s)
+    query = f"""INSERT INTO "{ws_name}".tables (name, views) VALUES (%s, %s)
             ON CONFLICT (name) DO UPDATE
-            SET primary_keys = excluded.primary_keys,
-                views = excluded.views;
+            SET views = excluded.views;
     """
     data = (desination_table_name, "{" + unique_key + "}", "[]")
     cursor.execute(query, data)
