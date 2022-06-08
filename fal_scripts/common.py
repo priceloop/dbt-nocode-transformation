@@ -66,13 +66,13 @@ def insert_new_columns_to_columns_table(cursor, conn, col_with_types, desination
         cursor.execute(query, data)
         index += 1
 
-    query = f"""INSERT INTO "{ws_name}".columns (table_name, name, tpe, position) VALUES (%s, %s, %s, %s)
-            ON CONFLICT (table_name, name) DO UPDATE
-            SET name = excluded.name,
-                tpe = excluded.tpe,
-                position = excluded.position;
-            """
-    cursor.execute(query, data)
+    # query = f"""INSERT INTO "{ws_name}".columns (table_name, name, tpe, position) VALUES (%s, %s, %s, %s)
+    #         ON CONFLICT (table_name, name) DO UPDATE
+    #         SET name = excluded.name,
+    #             tpe = excluded.tpe,
+    #             position = excluded.position;
+    #         """
+    # cursor.execute(query, data)
     conn.commit()
 
 
