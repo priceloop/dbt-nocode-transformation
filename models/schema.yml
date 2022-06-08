@@ -5,7 +5,6 @@ models:
     description: Customer data
     config:
       materialized: table
-      unique_key: "{{ env_var('UNIQUE_KEY', var('unique_key', '')) }}"
     meta:
       fal:
         scripts:
