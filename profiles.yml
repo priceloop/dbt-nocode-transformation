@@ -9,4 +9,4 @@ amazon:
       user: "postgres"
       pass: "test3"
       dbname: "priceloop"
-      schema: "My first Workspace"
+      schema: "{{ env_var('DATABASE_SCHEMA', var('database_schema', '')) }}"

@@ -1,7 +1,7 @@
 version: 2
 sources:
 - name: airbyte
-  schema: public
+  schema: "{{ env_var('DATABASE_SCHEMA', var('database_schema', '')) }}"
   quoting:
     schema: true
     identifier: false
