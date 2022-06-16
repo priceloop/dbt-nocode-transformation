@@ -40,6 +40,5 @@ def add_id_column():
 
 def main():
     add_id_column()
-    print("""Add ID column to "{}"."{}" """.format(ws_name, destination_table))
 
 main()
