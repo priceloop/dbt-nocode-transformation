@@ -10,6 +10,4 @@ models:
       fal:
         scripts:
           before:
-            - fal_scripts/create_or_update_nocode_metadata_tables.py
-          after:
-            - fal_scripts/add_id_column.py
+            - fal_scripts/script.py

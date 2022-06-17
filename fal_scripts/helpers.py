@@ -49,3 +49,15 @@ def insert_table_metadata(cursor, conn, destination_table, ws_name):
     data = (destination_table, "[]")
     cursor.execute(query, data)
     conn.commit()
+
+
+def add_id_column(cursor, conn, destination_table, ws_name):
+    col_with_types = get_columns_info(cursor, destination_table, ws_name)
+    pk_id = "_priceloop_id"
+    if pk_id not in [col[0] for col in col_with_types]:
+        query = f"""
+            ALTER TABLE "{ws_name}"."{destination_table}"
+            ADD COLUMN "{pk_id}" int4 NOT NULL GENERATED ALWAYS AS IDENTITY;
+        """
+        cursor.execute(query)
+        conn.commit()
