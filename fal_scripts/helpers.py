@@ -42,7 +42,7 @@ def insert_columns_metadata(cursor, conn, col_with_types, destination_table, ws_
 
 
 def insert_table_metadata(cursor, conn, destination_table, ws_name):
-    query = f"""INSERT INTO "{ws_name}".tables (name, alias, views) VALUES (%s, %s)
+    query = f"""INSERT INTO "{ws_name}".tables (name, alias, views) VALUES (%s, %s, %s)
             ON CONFLICT (name) DO UPDATE
             SET views = excluded.views;
     """
