@@ -46,7 +46,7 @@ def insert_table_metadata(cursor, conn, destination_table, ws_name):
             ON CONFLICT (name) DO UPDATE
             SET views = excluded.views;
     """
-    data = (destination_table, destination_table "[]")
+    data = (destination_table, destination_table, "[]")
     cursor.execute(query, data)
     conn.commit()
 
