@@ -36,3 +36,8 @@ models:
   priceloop:
     views:
       +materialized: view
+
+quoting:
+  database: true
+  schema: true
+  identifier: true

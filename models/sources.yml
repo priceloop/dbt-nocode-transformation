@@ -2,8 +2,5 @@ version: 2
 sources:
 - name: airbyte
   schema: "{{ env_var('DATABASE_SCHEMA', var('database_schema', '')) }}"
-  quoting:
-    schema: true
-    identifier: false
   tables:
     - name: "{{ env_var('SOURCE_TABLE', var('source_table', '')) }}"
