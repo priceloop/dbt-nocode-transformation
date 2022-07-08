@@ -4,9 +4,9 @@ amazon:
     dev:
       type: postgres
       threads: 4
-      host: "localhost"
+      host: "{{ env_var('DATABASE_HOST', var('database_host', '')) }}"
       port: 5432
-      user: "postgres"
-      pass: "test3"
-      dbname: "priceloop"
+      user: "{{ env_var('DATABASE_USERNAME', var('database_username', '')) }}"
+      pass: "{{ env_var('DATABASE_PASSWORD', var('database_password', '')) }}"
+      dbname: "{{ env_var('DATABASE_NAME', var('database_name', '')) }}"
       schema: "{{ env_var('DATABASE_SCHEMA', var('database_schema', '')) }}"
