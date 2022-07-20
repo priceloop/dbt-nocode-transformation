@@ -6,13 +6,10 @@ def get_columns_info(cursor, source_table_name, ws_name):
     all_columns = cursor.fetchall()
     cols = []
     for col in all_columns:
-        # exclude airbyte generated columns
-        if not col[3].startswith('_airbyte'):
-            cols.append(col)
-    col_with_types = []
-    for col in cols:
-        col_with_types.append((col[3], col[7], col[27]))
-    return col_with_types
+        # exclude metadata columns
+        if not col[3].startswith('_'):
+            cols.append([col[3], col[7], col[27]])
+    return cols
 
 
 def insert_columns_metadata(cursor, conn, col_types, destination_table, ws_name):
@@ -32,8 +29,13 @@ def insert_columns_metadata(cursor, conn, col_types, destination_table, ws_name)
                     tpe = excluded.tpe,
                     position = excluded.position;
         """
-        col_type = 'CtNumber' if col[1].lower(
-        ) in ['integer', 'double precision'] else 'CtString'
+        # no case matching in python :sad-emoji:
+        if col[1] in ['integer', 'double precision']:
+            col_type = 'CtNumber'
+        elif col[1] == 'boolean':
+            col_type = 'CtBoolean'
+        else:
+            col_type = 'CtString'
 
         data = (destination_table, col[0], f'{{"{col_type}":{{}}}}', index)
         cursor.execute(query, data)
@@ -82,7 +84,7 @@ def add_id_column(cursor, conn, destination_table, ws_name):
     if pk_id not in [col[0] for col in col_with_types]:
         query = f"""
             ALTER TABLE "{ws_name}"."{destination_table}"
-            ADD COLUMN "{pk_id}" int4 NOT NULL GENERATED ALWAYS AS IDENTITY;
+            ADD COLUMN IF NOT EXISTS "{pk_id}" int4 NOT NULL GENERATED ALWAYS AS IDENTITY;
         """
         cursor.execute(query)
         conn.commit()
