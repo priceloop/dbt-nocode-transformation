@@ -8,5 +8,4 @@ models:
     meta:
       fal:
         scripts:
-          before:
-            - fal_scripts/script.py
+          - fal_scripts/script.py
