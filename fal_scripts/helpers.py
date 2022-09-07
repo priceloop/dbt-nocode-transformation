@@ -84,7 +84,7 @@ def add_id_column(cursor, conn, destination_table, ws_name):
     if pk_id not in [col[0] for col in col_with_types]:
         query = f"""
             ALTER TABLE "{ws_name}"."{destination_table}"
-            ADD COLUMN IF NOT EXISTS "{pk_id}" int4 NOT NULL GENERATED ALWAYS AS IDENTITY;
+            ADD COLUMN IF NOT EXISTS "{pk_id}" int4 PRIMARY KEY GENERATED ALWAYS AS IDENTITY;
         """
         cursor.execute(query)
         conn.commit()
